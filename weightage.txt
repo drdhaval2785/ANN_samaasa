@@ -1,0 +1,63 @@
+Documentation of weightages
+
+function f(x) = (observation)/(52)
+
+a - 1
+A - 2
+i - 3
+I
+u
+U
+f
+F
+x
+X
+e
+o
+E
+O
+k
+K
+g
+G
+N
+c
+C
+j
+J
+Y
+w
+W
+q
+Q
+R
+t
+T
+d
+D
+n
+p
+P
+b
+B
+m
+y
+r
+l
+v
+S
+z
+s
+h
+M
+!
+H
+- - 51
+
+
+After assigning these values by f(x), every alphabet is having a value between 0 and 1.
+
+Then,
+lets have a 50 letters input layer,
+30 letters middle layer and
+55 output layer neurones corresponding to the 55 types mentioned in $samAsa_types described in paper Guidelines for tagging Sanskrit Compounds by KV Ramakrishnamacharyalu, V Sheeba and Amba Kulkarni 6/6/2009
