@@ -1,14 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="mystyle.css">
-</link>
-</meta>
-</head> 
-<body>
 <?php
-ini_set('max_execution_time', 120);
+ini_set('max_execution_time', 1200);
 /* set memory limit to 1000 MB */
 //ini_set("memory_limit","1000M");
 include "dev-slp.php";
@@ -31,6 +22,7 @@ echo "Created an array of input compounds<br/>\n";
 $outputset = outputset($dataset2); // Corresponding array of outputs.
 echo "Created an array of output compound types<br/>\n";
 
+echo "Started training the Network.<br/>\n";
 train_the_network();
 //test_the_network();
 
@@ -45,45 +37,50 @@ global $inputset, $outputset, $samAsa_types;
 try
 {
   $objNetwork = Network::loadFromFile('strings.dat');
+	echo "Loaded data from strings,dat.<br/>\n";
 }
 catch(Exception $e)
 {
-  print 'Creating a new one...';
+  print 'Creating a new ANN class.<br/>\n';
  
   $objClassification = new Classification(55); // As of ANN 2.1.2
+	echo "Created a classification of 55 samAsa types.<br/>\n";
  
 	foreach ($samAsa_types as $value)
 	{
 		$objClassification->addClassifier($value);
 	}
+		echo "Added 55 samAsa types to Classification.<br/>\n";
  
   $objClassification->saveToFile('classifiers_strings.dat');
+	echo "Saved to classifiers_strings.dat.<br/>\n";
  
   $objNetwork = new Network(1, 30, 55);
+	echo "Created a new network with one input, 30 neurones in hidden layer. and 55 in the output layer.<br/>\n";
 
-  $objNetwork->setOutputErrorTolerance(0.1);
+  $objNetwork->setOutputErrorTolerance(5.0);
+	echo "Set the output error tolerance to 0.1.<br/>\n";
 
   $objStringValues = new StringValue(50); // As of ANN 2.1.1
+	echo "Fixed the maximum input string to 50.<br/>\n";
  
   $objStringValues->saveToFile('input_strings.dat');
+	echo "Saved to input_strings.dat.<br/>\n";
  
   $objValues = new Values;
- 
-/*  $objValues->train()
-    ->input($objStringValues->getInputValue('Hallo Welt'))
-    ->output($objClassification->getOutputValue('german'))
-    ->input($objStringValues->getInputValue('Hello World'))
-    ->output($objClassification('english')); // As of PHP 5.3.0*/
-	
-//	for($i=0;$i<count($inputset);$i++)
-	for ($i=0;$i<10;$i++)
+	echo "Created a class objValues to store the values of input and output of test data.<br/>\n";
+ 	
+	for ($i=0;$i<count($inputset);$i++)
 	{
+		echo $inputset[$i]." ".$outputset[$i]."<br/>\n";
 		$objValues->train()
 		->input($objStringValues($inputset[$i]))
 		->output($objClassification($outputset[$i])); // As of PHP 5.3.0
 	}
+		echo 'Added the value of input and output of training data.<br/>\n';
  
   $objValues->saveToFile('values_strings.dat');
+	echo "Stored data in values_strings.dat.<br/>\n";
  
   unset($objValues);
 }
@@ -91,6 +88,7 @@ catch(Exception $e)
 try
 {
   $objValues = Values::loadFromFile('values_strings.dat');
+	echo "Loaded the data from values_strings.dat.<br/>\n";
 }
 catch(Exception $e)
 {
@@ -98,12 +96,17 @@ catch(Exception $e)
 }
  
 $objNetwork->setValues($objValues);
- 
+	echo "Set the loaded values in our Network.<br/>\n";
+
+	echo "Training of the network started.<br/>\n";	
 $objNetwork->train();
+	echo "Trained the network.<br/>\n";
  
 $objNetwork->saveToFile('strings.dat');
+	echo "Saved to strings.dat.<br/>\n";
  
 $objNetwork->printNetwork();
+	echo "Displaying the Network to the user.<br/>\n";
 }
 /* Training of the network ends */
 
@@ -257,5 +260,3 @@ function outputset($dataset2)
 }
 
 ?>
-</body>
-</html>

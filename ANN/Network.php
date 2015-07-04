@@ -507,9 +507,11 @@ class Network extends Filesystem implements InterfaceLoadable
 	
 	  $intLoop = 0;
 	  
-	  while($this->hasTimeLeftForTraining())
+//	  while($this->hasTimeLeftForTraining())
+		while($intLoop<100)
 	  {
 	  	$intLoop++;
+		echo "Started the $intLoop loop of training<br/>\n";
 
     	$this->setDynamicLearningRate($intLoop);
 
@@ -1130,8 +1132,8 @@ class Network extends Filesystem implements InterfaceLoadable
 	
 	public function setOutputErrorTolerance($floatOutputErrorTolerance = 0.02)
 	{
-	  if($floatOutputErrorTolerance < 0 || $floatOutputErrorTolerance > 0.1)
-	    throw new Exception('$floatOutputErrorTolerance must be between 0 and 0.1');
+//	  if($floatOutputErrorTolerance < 0 || $floatOutputErrorTolerance > 0.1)
+//	    throw new Exception('$floatOutputErrorTolerance must be between 0 and 0.1');
 	
 	  $this->floatOutputErrorTolerance = $floatOutputErrorTolerance;
 	}
