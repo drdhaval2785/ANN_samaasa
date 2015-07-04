@@ -110,7 +110,7 @@ final class Classification extends Filesystem implements InterfaceLoadable
 	{
 		foreach($this->arrClassifiers as $strClassifier)
 		{
-			if(strtolower($strClassifier) == strtolower($strValue))
+			if($strClassifier == $strValue)
 				return TRUE;
 		}
 	
@@ -163,8 +163,6 @@ final class Classification extends Filesystem implements InterfaceLoadable
 				$boolFound = TRUE;
 		}
 		
-		if(!$boolFound)
-			throw new Exception('Classifier(s) "'. implode(', ', $arrValues) .'" not found');
 		
 		$intCountRemainingOutputs = $this->intMaxClassifiers - count($arrReturn);
 	

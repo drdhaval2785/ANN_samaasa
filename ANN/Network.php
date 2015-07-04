@@ -1291,7 +1291,8 @@ class Network extends Filesystem implements InterfaceLoadable
 
 	protected function getMaxExecutionTime()
 	{
-		return (int)ini_get('max_execution_time');
+		//return (int)ini_get('max_execution_time');
+		return 36000;
 	}
 	
 	/**

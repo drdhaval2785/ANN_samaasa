@@ -117,8 +117,6 @@ final class StringValue extends Filesystem implements InterfaceLoadable
 		if(!is_string($strValue))
 			throw new Exception('$strValue should be string');
 			
-		if(!$this->boolOverride && mb_strlen($strValue) > $this->intMaxStringLength)
-			throw new Exception('$strValue is longer than max string length');
 			
 		substr($strValue, 0, $this->intMaxStringLength);
 		

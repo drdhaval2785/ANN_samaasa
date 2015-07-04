@@ -63,7 +63,8 @@ class Values extends Filesystem implements InterfaceLoadable
 	/**
 	 * @var array
 	 */
-	protected $arrInputs  = array();
+//	protected $arrInputs  = array();
+	public $arrInputs  = array();
 
 	/**
 	 * @var array
@@ -293,4 +294,16 @@ class Values extends Filesystem implements InterfaceLoadable
 	  
 	  return $this;
 	}
+	
+	public function repeat($inputset,$outputset)
+	{
+		for($i=0;$i<count($inputset);$i++)
+		{
+			$this->train()
+			->input($objStringValues($inputset[$i]))
+			->output($objClassification($outputset[$i])); // As of PHP 5.3.0
+		}
+		return $this;
+	}
+
 }
