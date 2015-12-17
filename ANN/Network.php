@@ -508,7 +508,7 @@ class Network extends Filesystem implements InterfaceLoadable
 	  $intLoop = 0;
 	  
 //	  while($this->hasTimeLeftForTraining())
-		while($intLoop<100)
+		while($intLoop<10000)
 	  {
 	  	$intLoop++;
 		echo "Started the $intLoop loop of training<br/>\n";

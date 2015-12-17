@@ -24,7 +24,7 @@ echo "Created an array of output compound types<br/>\n";
 
 echo "Started training the Network.<br/>\n";
 train_the_network();
-//test_the_network();
+test_the_network();
 
 
 
@@ -58,7 +58,7 @@ catch(Exception $e)
   $objNetwork = new Network(1, 30, 55);
 	echo "Created a new network with one input, 30 neurones in hidden layer. and 55 in the output layer.<br/>\n";
 
-  $objNetwork->setOutputErrorTolerance(5.0);
+  $objNetwork->setOutputErrorTolerance(0.1);
 	echo "Set the output error tolerance to 0.1.<br/>\n";
 
   $objStringValues = new StringValue(50); // As of ANN 2.1.1
@@ -149,21 +149,13 @@ function test_the_network()
 	  die('Loading of classification failed');
 	}
 	 
-	$objValues->input($objStringValues->getInputValue('HAllo Welt'));
-	$objValues->input($objStringValues->getInputValue('Hello World'));
-	$objValues->input($objStringValues->getInputValue('Hálló Wélt'));
-	$objValues->input($objStringValues->getInputValue('Hélló Wórld'));
-	$objValues->input($objStringValues('Hßllo Welt'));   // As of PHP 5.3.0
-	$objValues->input($objStringValues('Hßlló Wórld'));  // As of PHP 5.3.0
-	$objValues->input($objStringValues('Hallo Welt!'));  // As of PHP 5.3.0
-	$objValues->input($objStringValues('Helló Wórld!')); // As of PHP 5.3.0
+	$objValues->input($objStringValues->getInputValue('Darma-kzetre'));
 	 
 	$objNetwork->setValues($objValues);
 	 
 //	$objNetwork->printNetwork();
 	 
 	$arrOutputs = $objNetwork->getOutputs();
-	  print_r($objValues->arrInputs);
 	 
 	foreach($arrOutputs as $arrOutput)
 	  print_r($objClassification->getRealOutputValue($arrOutput));
